@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoLens – Your Photos. Your Map.</title>
+    <meta name="description"
+        content="GeoLens – Find where your photos were taken using GPS extraction and smart location detection. Download free for Windows.">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data:;">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles (after Bootstrap to override) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ========== SCROLL PROGRESS BAR ========== -->
+    <div id="scroll-progress"></div>
+
+    <!-- ========== MOUSE GLOW FOLLOWER ========== -->
+    <div id="mouse-glow"></div>
+
+    <!-- ========== GLOBE CONTAINER ========== -->
+    <div id="globe-container"></div>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar navbar-expand-md sticky-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <img src="icon.png" alt="GeoLens Icon" width="28" height="28">
+                <span class="fs-6 glitch-hover">GeoLens</span>
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-lg-3 gap-2 mt-3 mt-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#download" class="btn btn-download px-3 py-2">
+                            Download
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero-section text-center" id="hero">
+        <div class="container position-relative" style="z-index: 1;">
+            <div class="hero-particles-2"></div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-xl-8">
+                    <div class="hero-badge">
+                        <span class="badge-pill">
+                            v3.0 – Latest Release
+                        </span>
+                    </div>
+                    <h1 class="hero-title">
+                        Find Where Your<br>
+                        <span class="typewriter-wrap">Photos Were <span id="typewriter"
+                                class="typewriter-text">Taken</span><span class="typewriter-cursor">|</span></span>
+                    </h1>
+                    <p class="hero-subtitle mb-5">
+                        Advanced GPS extraction combined with smart location detection. Understand your travel
+                        history like never before.
+                    </p>
+                    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center align-items-center"
+                        id="download">
+                        <a href="GeoLens.exe" class="btn btn-download btn-lg px-5 py-3 btn-pulse-glow" download>
+                            Download for Windows
+                        </a>
+                        <a href="#features" class="btn btn-outline-light btn-lg px-4 py-3">
+                            Learn More
+                        </a>
+                    </div>
+                    <p class="mt-4 small opacity-50">
+                        Compatible with Windows 10/11
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== APP DEMO ========== -->
+    <section class="pb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="app-window animate-card">
+                        <div class="app-top-bar">
+                            <div class="app-top-left">
+                                <span class="app-logo-icon">📍</span>
+                                <span class="app-logo-text">GeoLens</span>
+                            </div>
+                            <div class="app-top-center">
+                                <span class="app-typing">Locating...</span><span class="app-cursor">|</span>
+                            </div>
+                            <div class="app-top-right">
+                                <div class="app-layer-switch">
+                                    <div class="app-layer-btn active" title="Dark"></div>
+                                    <div class="app-layer-btn" title="Sat"></div>
+                                    <div class="app-layer-btn" title="Street"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="app-body">
+                            <div class="row g-0 h-100">
+                                <!-- Sidebar (Mimicking Real App) -->
+                                <div class="col-3 d-none d-md-flex flex-column demo-sidebar">
+                                    <div class="demo-sidebar-section">
+                                        <div class="demo-section-header">🌍 SEARCH AREA</div>
+                                        <div class="demo-input-group">
+                                            <div class="demo-label">Country</div>
+                                            <div class="demo-select">France</div>
+                                        </div>
+                                        <div class="demo-input-group">
+                                            <div class="demo-label">City</div>
+                                            <div class="demo-input">Paris</div>
+                                        </div>
+                                    </div>
+                                    <div class="demo-sidebar-section">
+                                        <div class="demo-section-header">📊 STATS</div>
+                                        <div class="demo-stats-grid">
+                                            <div class="demo-stat-box">
+                                                <span class="demo-stat-n">8</span>
+                                                <span class="demo-stat-l">Photos</span>
+                                            </div>
+                                            <div class="demo-stat-box">
+                                                <span class="demo-stat-n">2</span>
+                                                <span class="demo-stat-l">Countries</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Simplified File List area but styled like real app -->
+                                    <div class="demo-sidebar-section flex-grow-1" style="border-bottom:none;">
+                                        <div class="demo-section-header">🧠 AI LOGIC</div>
+                                        <div class="demo-ai-console" id="demoAiConsole">
+                                            <span class="ai-line">> Initializing neural net...</span>
+                                            <span class="ai-line">> Scanning pixel data...</span>
+                                        </div>
+                                    </div>
+                                    <div class="sidebar-footer p-2 text-center text-secondary"
+                                        style="font-size:9px; border-top:1px solid var(--gl-border);">
+                                        GeoLens v3.0
+                                    </div>
+                                </div>
+                                <!-- Map Area -->
+                                <div class="col-md-9 p-0 position-relative demo-map-area">
+                                    <!-- Floating Search Bar (Like App) -->
+                                    <div class="demo-floating-search">
+                                        <i class="bi bi-search"></i>
+                                        <span>Search location...</span>
+                                    </div>
+                                    <div class="demo-grid-overlay"></div>
+                                    <div class="demo-scan-line"></div>
+                                    <div class="demo-marker" style="top: 25%; left: 45%;">
+                                        <div class="demo-marker-pulse"></div>
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                        <span class="demo-marker-label">Paris</span>
+                                    </div>
+                                    <div class="demo-marker" style="top: 30%; left: 78%;">
+                                        <div class="demo-marker-pulse"></div>
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                        <span class="demo-marker-label">Tokyo</span>
+                                    </div>
+                                    <div class="demo-marker marker-scanning" style="top: 55%; left: 55%;">
+                                        <div class="demo-marker-pulse scanning"></div>
+                                        <i class="bi bi-crosshair"></i>
+                                    </div>
+                                    <svg class="demo-connections" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                        <line x1="45" y1="25" x2="78" y2="30" class="demo-conn-line" />
+                                        <line x1="45" y1="25" x2="55" y2="55" class="demo-conn-line dashed" />
+                                    </svg>
+                                    <div class="demo-coords">
+                                        <div class="demo-coords-row">
+                                            <span class="demo-coords-label">LAT</span>
+                                            <span class="demo-coords-value">48.8566&#176;N</span>
+                                        </div>
+                                        <div class="demo-coords-row">
+                                            <span class="demo-coords-label">LON</span>
+                                            <span class="demo-coords-value">2.3522&#176;E</span>
+                                        </div>
+                                    </div>
+                                    <div class="demo-photo-card">
+                                        <div class="demo-photo-thumb">
+                                            <i class="bi bi-image-fill"></i>
+                                        </div>
+                                        <div class="demo-photo-info">
+                                            <div class="demo-photo-title">sunset_paris.jpg</div>
+                                            <div class="demo-photo-detail"><i class="bi bi-camera"></i> Canon EOS R5
+                                            </div>
+                                            <div class="demo-photo-detail"><i class="bi bi-calendar3"></i> 2025-08-14
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== STATS BAR ========== -->
+    <section class="stats-bar py-5">
+        <div class="container">
+            <div class="row row-cols-2 row-cols-md-4 g-4 text-center">
+                <div class="col">
+                    <div class="stat-item">
+                        <span class="stat-number">30+</span>
+                        <span class="stat-label">Languages</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="stat-item">
+                        <span class="stat-number">Smart</span>
+                        <span class="stat-label">Processing</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="stat-item">
+                        <span class="stat-number">3D</span>
+                        <span class="stat-label">Visualization</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="stat-item">
+                        <span class="stat-number">Free</span>
+                        <span class="stat-label">Forever</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FEATURES ========== -->
+    <section class="section-pad" id="features">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">Powerful Features</h2>
+                <p class="text-secondary mx-auto" style="max-width: 500px;">
+                    Everything you need to discover the story behind your photos.
+                </p>
+            </div>
+            <div class="row g-4">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="feature-card animate-card">
+                        <div class="feature-icon-wrap">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+                        <h3 class="h5">GPS Extraction</h3>
+                        <p class="small mb-0">
+                            Automatically extract GPS coordinates from your photos' EXIF data and visualize them on an
+                            interactive map.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="feature-card animate-card">
+                        <div class="feature-icon-wrap">
+                            <i class="bi bi-lightning-charge"></i>
+                        </div>
+                        <h3 class="h5">Smart Analysis</h3>
+                        <p class="small mb-0">
+                            No GPS? No problem. Our system scans your photo for landmarks, signs, and vegetation to
+                            estimate
+                            the location.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="feature-card animate-card">
+                        <div class="feature-icon-wrap">
+                            <i class="bi bi-activity"></i>
+                        </div>
+                        <h3 class="h5">Heatmap</h3>
+                        <p class="small mb-0">
+                            Visualize your travel density with a dynamic heatmap that highlights your most visited
+                            areas.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="feature-card animate-card">
+                        <div class="feature-icon-wrap">
+                            <i class="bi bi-bar-chart"></i>
+                        </div>
+                        <h3 class="h5">Stats & Export</h3>
+                        <p class="small mb-0">
+                            Track countries visited, miles traveled, export your journey to PDF, GPX, or KML.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== HOW IT WORKS ========== -->
+    <section class="section-pad" id="how-it-works">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">How It Works</h2>
+                <p class="text-secondary mx-auto" style="max-width: 500px;">
+                    Three simple steps to discover where your photos were taken.
+                </p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="step-card text-center animate-card">
+                        <div class="step-number">1</div>
+                        <h3 class="h5">Upload Photo</h3>
+                        <p class="small mb-0">
+                            Drag & drop or select your photos. Supports all common image formats.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card text-center animate-card">
+                        <div class="step-number">2</div>
+                        <h3 class="h5">Auto Analyze</h3>
+                        <p class="small mb-0">
+                            GPS data is extracted. If absent, GeoLens scans the image for visual clues.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card text-center animate-card">
+                        <div class="step-number">3</div>
+                        <h3 class="h5">Explore Map</h3>
+                        <p class="small mb-0">
+                            Pinpointed locations appear on a beautiful 3D globe with trails and heatmaps.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SUPPORTED FORMATS ========== -->
+    <section class="section-pad">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">Works With Everything</h2>
+                <p class="text-secondary mx-auto" style="max-width: 500px;">
+                    GeoLens supports all major image formats and metadata standards.
+                </p>
+            </div>
+            <div class="row g-3 justify-content-center">
+                <div class="col-6 col-sm-4 col-md-2">
+                    <div class="format-card animate-card">
+                        <i class="bi bi-filetype-jpg"></i>
+                        <span>JPEG</span>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <div class="format-card animate-card">
+                        <i class="bi bi-filetype-png"></i>
+                        <span>PNG</span>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <div class="format-card animate-card">
+                        <i class="bi bi-filetype-raw"></i>
+                        <span>RAW</span>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <div class="format-card animate-card">
+                        <i class="bi bi-filetype-tiff"></i>
+                        <span>TIFF</span>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <div class="format-card animate-card">
+                        <i class="bi bi-file-earmark-image"></i>
+                        <span>HEIF</span>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <div class="format-card animate-card">
+                        <i class="bi bi-filetype-gif"></i>
+                        <span>GIF</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section class="section-pad" id="testimonials">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">Loved by Photographers</h2>
+                <p class="text-secondary mx-auto" style="max-width: 500px;">
+                    See what our users have to say about GeoLens.
+                </p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="testimonial-card animate-card">
+                        <div class="testimonial-stars">
+                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="testimonial-text">&ldquo;GeoLens found the exact location of my vacation photos from 5
+                            years ago. Incredible!&rdquo;</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">M</div>
+                            <div>
+                                <div class="testimonial-name">Marco R.</div>
+                                <div class="testimonial-role">Travel Photographer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card animate-card">
+                        <div class="testimonial-stars">
+                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="testimonial-text">&ldquo;The heatmap feature is amazing. I can see everywhere
+                            I&rsquo;ve been at a glance. A must-have tool.&rdquo;</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">S</div>
+                            <div>
+                                <div class="testimonial-name">Sarah K.</div>
+                                <div class="testimonial-role">Digital Nomad</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card animate-card">
+                        <div class="testimonial-stars">
+                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                class="bi bi-star-half"></i>
+                        </div>
+                        <p class="testimonial-text">&ldquo;Clean UI, fast processing, and the 3D globe view is stunning.
+                            Best free tool out there.&rdquo;</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">J</div>
+                            <div>
+                                <div class="testimonial-name">James L.</div>
+                                <div class="testimonial-role">Hobbyist</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ACHIEVEMENT POPUP (Hidden by default) ========== -->
+    <div class="achievement-popup" id="demoAchievement">
+        <div class="achieve-icon">🏆</div>
+        <div class="achieve-info">
+            <span class="achieve-label">Achievement Unlocked!</span>
+            <span class="achieve-title">First Explorer</span>
+        </div>
+    </div>
+
+    <!-- ========== CTA ========== -->
+    <section class="section-pad">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="cta-card text-center p-5 animate-card">
+                        <h2 class="fw-bold mb-3">Ready to explore?</h2>
+                        <p class="text-secondary mb-4 mx-auto" style="max-width: 450px;">
+                            Download GeoLens for free and turn your photo library into an adventure map.
+                        </p>
+                        <a href="GeoLens.exe" class="btn btn-download btn-lg px-5 py-3" download>
+                            Download GeoLens
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="py-4">
+        <div class="container">
+            <div class="row align-items-center gy-3">
+                <div class="col-md-6 text-center text-md-start">
+                    <div class="d-flex align-items-center gap-2 justify-content-center justify-content-md-start">
+                        <img src="icon.png" alt="GeoLens" width="20" height="20">
+                        <span class="text-secondary small">© 2026 GeoLens Team. All rights reserved. Made with <span
+                                class="heartbeat">❤️</span> by
+                            Csanad</span>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#hero" class="text-secondary text-decoration-none small">
+                        Back to top
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Smooth scroll, animations & liquid glass interactions -->
+    <script>
+        // Close mobile nav on link click
+        document.querySelectorAll('.navbar-nav .nav-link, .navbar-nav .btn').forEach(el => {
+            el.addEventListener('click', () => {
+                const collapse = document.querySelector('.navbar-collapse');
+                if (collapse && collapse.classList.contains('show')) {
+                    const bsCollapse = bootstrap.Collapse.getInstance(collapse);
+                    if (bsCollapse) bsCollapse.hide();
+                }
+            });
+        });
+
+        // Scroll animations (IntersectionObserver)
+        const animateEls = document.querySelectorAll('.animate-card, .stat-item, .hero-title, .hero-subtitle');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animateEls.forEach(el => observer.observe(el));
+
+        // ===== PARALLAX TILT on glass cards =====
+        document.querySelectorAll('.feature-card, .step-card, .cta-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -5;
+                const rotateY = ((x - centerX) / centerX) * 5;
+                card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateY(0)';
+            });
+        });
+
+        // ===== HERO PARALLAX on scroll =====
+        const heroSection = document.querySelector('.hero-section');
+        window.addEventListener('scroll', () => {
+            if (!heroSection) return;
+            const scrollY = window.scrollY;
+            const opacity = Math.max(0, 1 - scrollY / 600);
+            const translateY = scrollY * 0.3;
+            heroSection.style.opacity = opacity;
+            heroSection.style.transform = `translateY(${translateY}px)`;
+        }, { passive: true });
+
+        // ===== MAGNETIC EFFECT on download buttons =====
+        document.querySelectorAll('.btn-download').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.02)`;
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0) scale(1)';
+            });
+        });
+
+        // ===== NUMBER COUNTER ANIMATION =====
+        const statNumbers = document.querySelectorAll('.stat-number, .step-number');
+        const countObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const finalValue = parseInt(el.textContent.replace(/\D/g, ''));
+                    // Only animate if it's a number
+                    if (!isNaN(finalValue) && finalValue > 0) {
+                        let start = 0;
+                        const duration = 2000;
+                        const startTime = performance.now();
+
+                        // Preserve original text structure (e.g. "30+" -> suffix "+")
+                        const originalText = el.textContent;
+                        const suffix = originalText.replace(/[0-9]/g, '');
+
+                        function updateCount(currentTime) {
+                            const elapsed = currentTime - startTime;
+                            const progress = Math.min(elapsed / duration, 1);
+                            // Ease out func
+                            const ease = 1 - Math.pow(1 - progress, 3);
+
+                            const currentVal = Math.floor(ease * finalValue);
+                            el.textContent = currentVal + suffix;
+
+                            if (progress < 1) {
+                                requestAnimationFrame(updateCount);
+                            } else {
+                                el.textContent = originalText; // Ensure exact final match
+                            }
+                        }
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        // For non-numeric stats like "Smart", just fade in/pop
+                        el.style.animation = 'popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
+                    }
+                    countObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(el => countObserver.observe(el));
+
+        // ===== INTERACTIVE DEMO (AI Console + Layers) =====
+        const aiConsole = document.getElementById('demoAiConsole');
+        const demoMap = document.querySelector('.demo-map-area');
+        const layerBtns = document.querySelectorAll('.app-layer-btn');
+        const aiLines = [
+            "> Analyzing architecture style...",
+            "> Match found: Haussmannian (98%)",
+            "> Triangulating landmarks...",
+            "> Eiffel Tower visibility: Yes",
+            "> Coordinates locked: 48.8566°N",
+            "> Location confirmed: Paris, FR"
+        ];
+        let lineIdx = 0;
+
+        // AI Typing Loop
+        function typeAiLines() {
+            if (!aiConsole) return;
+            // Only type if visible
+            const rect = aiConsole.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                if (lineIdx < aiLines.length) {
+                    const line = document.createElement('div');
+                    line.className = 'ai-line new';
+                    line.textContent = aiLines[lineIdx];
+                    aiConsole.appendChild(line);
+                    lineIdx++;
+                    aiConsole.scrollTop = aiConsole.scrollHeight;
+                } else {
+                    // Reset to loop
+                    setTimeout(() => {
+                        aiConsole.innerHTML = '';
+                        lineIdx = 0;
+                    }, 3000);
+                }
+            }
+        }
+        setInterval(typeAiLines, 1500);
+
+        // Layer Switcher Logic
+        layerBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                layerBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Simulate map change via CSS filter
+                const type = btn.getAttribute('title');
+                if (type === 'Sat') {
+                    demoMap.style.filter = 'contrast(1.2) saturate(1.2) brightness(0.8) hue-rotate(-10deg)';
+                } else if (type === 'Street') {
+                    demoMap.style.filter = 'invert(0.9) hue-rotate(180deg) contrast(0.9)';
+                } else {
+                    // Dark (default)
+                    demoMap.style.filter = 'none';
+                }
+            });
+        });
+
+        // Achievement Popup Trigger
+        const achievementEl = document.getElementById('demoAchievement');
+        const statsSection = document.querySelector('.stats-bar');
+
+        const achieveObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        achievementEl.classList.add('visible');
+                        // Play sound effect locally if possible (omitted for strict browser policies)
+                        setTimeout(() => achievementEl.classList.remove('visible'), 4000);
+                    }, 500);
+                    achieveObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        if (statsSection) achieveObserver.observe(statsSection);
+    </script>
+
+    <!-- Three.js for 3D Globe -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+
+    <script>
+        // ===== 3D GLOBE =====
+        const container = document.getElementById('globe-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 20;
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        // Main wireframe globe
+        const geometry = new THREE.IcosahedronGeometry(10, 2);
+        const material = new THREE.MeshBasicMaterial({ color: 0x333333, wireframe: true, transparent: true, opacity: 0.15 });
+        const globe = new THREE.Mesh(geometry, material);
+        scene.add(globe);
+
+        // Inner sphere
+        const innerGeo = new THREE.IcosahedronGeometry(9.8, 3);
+        const innerMat = new THREE.MeshBasicMaterial({ color: 0x1a1a2e, wireframe: true, transparent: true, opacity: 0.05 });
+        const innerGlobe = new THREE.Mesh(innerGeo, innerMat);
+        scene.add(innerGlobe);
+
+        // Orbital rings
+        const ringGeo = new THREE.RingGeometry(12.5, 12.6, 64);
+        const ringMat = new THREE.MeshBasicMaterial({ color: 0x6366f1, transparent: true, opacity: 0.08, side: THREE.DoubleSide });
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.rotation.x = Math.PI / 2.5;
+        scene.add(ring);
+
+        const ring2Geo = new THREE.RingGeometry(14, 14.08, 64);
+        const ring2Mat = new THREE.MeshBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.05, side: THREE.DoubleSide });
+        const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+        ring2.rotation.x = Math.PI / 1.8;
+        ring2.rotation.y = 0.3;
+        scene.add(ring2);
+
+        // Glowing city dots
+        const cities = [
+            { lat: 47.5, lon: 19.0 },   // Budapest
+            { lat: 48.8, lon: 2.3 },    // Paris
+            { lat: 40.7, lon: -74.0 },  // New York
+            { lat: 35.7, lon: 139.7 },  // Tokyo
+            { lat: -33.9, lon: 18.4 },  // Cape Town
+            { lat: -22.9, lon: -43.2 }, // Rio
+            { lat: 51.5, lon: -0.1 },   // London
+            { lat: 55.75, lon: 37.6 },  // Moscow
+        ];
+        const dotGroup = new THREE.Group();
+        cities.forEach(pos => {
+            const phi = (90 - pos.lat) * (Math.PI / 180);
+            const theta = (pos.lon + 180) * (Math.PI / 180);
+            const r = 10.05;
+            const x = -r * Math.sin(phi) * Math.cos(theta);
+            const y = r * Math.cos(phi);
+            const z = r * Math.sin(phi) * Math.sin(theta);
+
+            const dotGeo = new THREE.SphereGeometry(0.12, 8, 8);
+            const dotMat = new THREE.MeshBasicMaterial({ color: 0x6366f1, transparent: true, opacity: 0.9 });
+            const dot = new THREE.Mesh(dotGeo, dotMat);
+            dot.position.set(x, y, z);
+            dotGroup.add(dot);
+
+            const glowGeo = new THREE.RingGeometry(0.15, 0.35, 16);
+            const glowMat = new THREE.MeshBasicMaterial({ color: 0x6366f1, transparent: true, opacity: 0.3, side: THREE.DoubleSide });
+            const glow = new THREE.Mesh(glowGeo, glowMat);
+            glow.position.set(x, y, z);
+            glow.lookAt(0, 0, 0);
+            dotGroup.add(glow);
+        });
+        scene.add(dotGroup);
+
+        // Particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 800;
+        const posArray = new Float32Array(particlesCount * 3);
+        for (let i = 0; i < particlesCount * 3; i++) { posArray[i] = (Math.random() - 0.5) * 40; }
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({ size: 0.05, color: 0x666666, transparent: true, opacity: 0.4 });
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        // Scroll-driven rotation
+        let velocityY = 0, velocityX = 0;
+        const damping = 0.98, scrollSensitivity = 0.00015, baseSpinY = 0.0001;
+
+        window.addEventListener('wheel', (e) => {
+            velocityY += e.deltaY * scrollSensitivity;
+            velocityX += e.deltaX * scrollSensitivity * 0.5;
+        }, { passive: true });
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        let time = 0;
+        function animateGlobe() {
+            requestAnimationFrame(animateGlobe);
+            time += 0.01;
+
+            velocityY *= damping;
+            velocityX *= damping;
+            if (Math.abs(velocityY) < 0.00001) velocityY = 0;
+            if (Math.abs(velocityX) < 0.00001) velocityX = 0;
+
+            globe.rotation.y += baseSpinY + velocityY;
+            globe.rotation.x += velocityX;
+            innerGlobe.rotation.y += baseSpinY * 0.8 + velocityY * 0.7;
+            innerGlobe.rotation.x += velocityX * 0.7;
+            dotGroup.rotation.y = globe.rotation.y;
+            dotGroup.rotation.x = globe.rotation.x;
+            ring.rotation.z += 0.0003;
+            ring2.rotation.z -= 0.0002;
+            particlesMesh.rotation.y += baseSpinY * 0.3 + velocityY * 0.3;
+            particlesMesh.rotation.x += velocityX * 0.2;
+
+            // Pulse glow rings
+            dotGroup.children.forEach((child, i) => {
+                if (child.geometry.type === 'RingGeometry') {
+                    child.material.opacity = 0.2 + Math.sin(time * 2 + i) * 0.15;
+                    child.scale.setScalar(1 + Math.sin(time * 2 + i) * 0.2);
+                }
+            });
+
+            renderer.render(scene, camera);
+        }
+        animateGlobe();
+
+        // ===== SCROLL PROGRESS BAR =====
+        const progressBar = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            if (progressBar) progressBar.style.width = scrollPercent + '%';
+        }, { passive: true });
+
+        // ===== MOUSE GLOW FOLLOWER =====
+        const mouseGlow = document.getElementById('mouse-glow');
+        let mX = 0, mY = 0, gX = 0, gY = 0;
+        document.addEventListener('mousemove', (e) => { mX = e.clientX; mY = e.clientY; });
+        function updateGlow() {
+            gX += (mX - gX) * 0.08;
+            gY += (mY - gY) * 0.08;
+            if (mouseGlow) {
+                mouseGlow.style.left = gX + 'px';
+                mouseGlow.style.top = gY + 'px';
+            }
+            requestAnimationFrame(updateGlow);
+        }
+        updateGlow();
+
+        // ===== TYPEWRITER EFFECT =====
+        const typewriterEl = document.getElementById('typewriter');
+        const words = ['Taken', 'Captured', 'Remembered', 'Discovered', 'Shot'];
+        let wordIdx = 0, charIdx = 0, deleting = false, speed = 120;
+
+        function typeWrite() {
+            const word = words[wordIdx];
+            if (deleting) {
+                if (typewriterEl) typewriterEl.textContent = word.substring(0, charIdx - 1);
+                charIdx--;
+                speed = 60;
+            } else {
+                if (typewriterEl) typewriterEl.textContent = word.substring(0, charIdx + 1);
+                charIdx++;
+                speed = 120;
+            }
+            if (!deleting && charIdx === word.length) { speed = 2000; deleting = true; }
+            else if (deleting && charIdx === 0) { deleting = false; wordIdx = (wordIdx + 1) % words.length; speed = 400; }
+            setTimeout(typeWrite, speed);
+        }
+        setTimeout(typeWrite, 1500);
+
+        // ================================================
+        // ========== 🥚 EASTER EGGS 🥚 =================
+        // ================================================
+
+        // --- 1. KONAMI CODE → Party Mode (↑↑↓↓←→←→BA) ---
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIdx = 0;
+        let partyActive = false;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiSequence[konamiIdx] || e.key.toLowerCase() === konamiSequence[konamiIdx]) {
+                konamiIdx++;
+                if (konamiIdx === konamiSequence.length) {
+                    konamiIdx = 0;
+                    if (!partyActive) activatePartyMode();
+                }
+            } else {
+                konamiIdx = 0;
+            }
+        });
+
+        function activatePartyMode() {
+            partyActive = true;
+            // Confetti burst
+            for (let i = 0; i < 80; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'ee-confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                confetti.style.width = (Math.random() * 8 + 4) + 'px';
+                confetti.style.height = confetti.style.width;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 4500);
+            }
+            // Rainbow border glow
+            document.body.classList.add('ee-party');
+            // Secret message
+            showEasterEggToast('🎉 PARTY MODE ACTIVATED!', 'You found the Konami Code!');
+            setTimeout(() => {
+                document.body.classList.remove('ee-party');
+                partyActive = false;
+            }, 6000);
+        }
+
+        // --- 2. CLICK LOGO 7x → Flip the world ---
+        let logoClicks = 0;
+        let logoTimer = null;
+        const logo = document.querySelector('.navbar-brand');
+        if (logo) {
+            logo.addEventListener('click', (e) => {
+                logoClicks++;
+                clearTimeout(logoTimer);
+                logoTimer = setTimeout(() => logoClicks = 0, 2000);
+                if (logoClicks >= 7) {
+                    logoClicks = 0;
+                    document.body.classList.add('ee-flip');
+                    showEasterEggToast('🙃 WORLD FLIPPED!', 'Everything is upside down...');
+                    setTimeout(() => document.body.classList.remove('ee-flip'), 4000);
+                }
+            });
+        }
+
+        // --- 3. TYPE "area51" → Classified scan effect ---
+        let secretBuffer = '';
+        document.addEventListener('keypress', (e) => {
+            secretBuffer += e.key.toLowerCase();
+            if (secretBuffer.length > 10) secretBuffer = secretBuffer.slice(-10);
+            if (secretBuffer.includes('area51')) {
+                secretBuffer = '';
+                activateArea51();
+            }
+        });
+
+        function activateArea51() {
+            const overlay = document.createElement('div');
+            overlay.className = 'ee-classified-overlay';
+            overlay.innerHTML = `
+                <div class="ee-classified-content">
+                    <div class="ee-scan-bar"></div>
+                    <div class="ee-classified-badge">⚠ CLASSIFIED</div>
+                    <div class="ee-classified-text">
+                        <p>SATELLITE UPLINK ESTABLISHED</p>
+                        <p>SCANNING COORDINATES: 37.2350°N, -115.8111°W</p>
+                        <p class="ee-blink">LOCATION: [REDACTED]</p>
+                        <p style="font-size:12px; margin-top:16px; opacity:0.5">ACCESS DENIED — CLEARANCE LEVEL 5 REQUIRED</p>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+            setTimeout(() => overlay.classList.add('active'), 50);
+            setTimeout(() => {
+                overlay.classList.remove('active');
+                setTimeout(() => overlay.remove(), 600);
+            }, 5000);
+        }
+
+        // --- 4. DOUBLE-CLICK GLOBE → Hyper spin ---
+        const globeEl = document.getElementById('globe-container');
+        if (globeEl) {
+            globeEl.addEventListener('dblclick', () => {
+                velocityY = 0.08;
+                velocityX = 0.03;
+                showEasterEggToast('🌪️ HYPER SPIN!', 'You spun the globe into overdrive!');
+            });
+        }
+
+        // --- 5. HOVER FOOTER 3s → Secret dev credits ---
+        const footerText = document.querySelector('footer .text-secondary.small');
+        let footerHoverTimer = null;
+        if (footerText) {
+            footerText.addEventListener('mouseenter', () => {
+                footerHoverTimer = setTimeout(() => {
+                    showEasterEggToast('👨‍💻 DEV SECRETS', 'Built with Three.js, Bootstrap 5, and way too much caffeine ☕. No AI was harmed in the making of this globe. 🌍');
+                }, 3000);
+            });
+            footerText.addEventListener('mouseleave', () => clearTimeout(footerHoverTimer));
+        }
+
+        // --- 6. CTRL+SHIFT+L → Night Vision mode ---
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'L') {
+                e.preventDefault();
+                document.body.classList.toggle('ee-nightvision');
+                const isOn = document.body.classList.contains('ee-nightvision');
+                showEasterEggToast(isOn ? '🟢 NIGHT VISION ON' : '🔴 NIGHT VISION OFF',
+                    isOn ? 'Tactical mode engaged. You can see everything.' : 'Returning to normal vision.');
+            }
+        });
+
+        // --- Toast notification system for easter eggs ---
+        function showEasterEggToast(title, msg) {
+            const existing = document.querySelector('.ee-toast');
+            if (existing) existing.remove();
+            const toast = document.createElement('div');
+            toast.className = 'ee-toast';
+            toast.innerHTML = `<strong>${title}</strong><p>${msg}</p>`;
+            document.body.appendChild(toast);
+            requestAnimationFrame(() => toast.classList.add('show'));
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
+    </script>
+
+    <script src="hero-tilt.js"></script>
+</body>
+
+</html>
